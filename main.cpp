@@ -5,7 +5,6 @@
 
 using namespace std;
 
-// TODO TODO xy
 
 int main(int /*argc*/, char** /*argv*/) {
 

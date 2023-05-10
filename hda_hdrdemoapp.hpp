@@ -1,6 +1,4 @@
 #pragma once
-
-
 #include "hda_window.hpp"
 #include "hda_instancegpu.hpp"
 #include "hda_swapchain.hpp"
@@ -14,6 +12,12 @@ const char win_name[] = "HDR Demo Application";
 const int WIN_WIDTH = 1920;
 const int WIN_HEIGHT = 1080;
 
+/*
+*
+* Tøída reprezentující hlavní modul, který volá metodu Builder::render()
+* pro vykreslení jednoho snímku.
+*
+*/
 
 class HdrDemoApp {
 

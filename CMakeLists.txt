@@ -1,7 +1,3 @@
-include(./.env.cmake OPTIONAL RESULT_VARIABLE LOCAL_ENV)
-message(STATUS "Local .env.cmake: ${LOCAL_ENV}")
-# first two lines is irrelevant, must delete before release 
-
 cmake_minimum_required(VERSION 3.11.0)
 
 set(NAME hdrDemoApp)
@@ -14,24 +10,22 @@ if (DEFINED VULKAN_SDK_PATH)
   set(Vulkan_INCLUDE_DIRS "${VULKAN_SDK_PATH}/Include") # 1.1 Make sure this include path is correct
   set(Vulkan_LIBRARIES "${VULKAN_SDK_PATH}/Lib") # 1.2 Make sure lib path is correct
   set(Vulkan_FOUND "True")
+  message(STATUS "Defined VulkanSDK")
 else()
-  find_package(Vulkan REQUIRED) # throws error if could not find Vulkan
-  set(Vulkan_INCLUDE_DIRS "C:/PROGRAMY/VulkanSDK/Include") # 1.1 Make sure this include path is correct
-  set(Vulkan_LIBRARIES "C:/PROGRAMY/VulkanSDK/Lib") # 1.2 Make sure lib path is correct
-  message(STATUS "Found Vulkan: $ENV{VULKAN_SDK}")
+  message(STATUS "In else")
+  find_package(Vulkan REQUIRED)
+  set(Vulkan_INCLUDE_DIRS "/VulkanSDK/Include") # 1.1 Make sure this include path is correct
+  set(Vulkan_LIBRARIES "/VulkanSDK/Lib") # 1.2 Make sure lib path is correct
+  message(STATUS "Not defined VulkanSDK")
 endif()
-if (NOT Vulkan_FOUND)
-	message(FATAL_ERROR "Could not find Vulkan library!")
-else()
-	message(STATUS "Using vulkan lib at: ${Vulkan_LIBRARIES}")
-endif()
+
+
 
 # append source dir (hda_hdrDemoApp) in list of folders where find to cmake modules (FindGLWF.cmake, FindVulkan.cmake etc.)
 list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}")
 
 
-# 2. Set GLFW_PATH in .env.cmake to target specific glfw
-# first branch is irrelevant, because .env.cmake file doesnt exist
+
 if (DEFINED GLFW_PATH)
   message(STATUS "Using GLFW path specified in .env")
   set(GLFW_INCLUDE_DIRS "${GLFW_PATH}/include")
@@ -42,24 +36,21 @@ if (DEFINED GLFW_PATH)
     set(GLFW_LIB "${GLFW_PATH}/lib-mingw-w64") # 2.1 make sure matches glfw mingw subdirectory
   endif()
 else()
-  find_package(glfw3 3.3 REQUIRED)
-  set(GLFW_LIB "C:/Program Files/Microsoft Visual Studio/2022/Libraries/glfw-3.3.8.bin.WIN64/lib-vc2022")
-  set(GLFW_INCLUDE_DIRS "C:/Program Files/Microsoft Visual Studio/2022/Libraries/glfw-3.3.8.bin.WIN64/include")
+  message(STATUS "In else")
+  find_package(glfw3 REQUIRED)
+  set(GLFW_LIB "/glfw-3.3.8.bin.WIN64/lib-vc2022")
+  set(GLFW_INCLUDE_DIRS "/glfw-3.3.8.bin.WIN64/include")
   message(STATUS "Found GLFW")
 endif()
-if (NOT GLFW_LIB)
-	message(FATAL_ERROR "Could not find glfw library!")
-else()
-	message(STATUS "Using glfw lib at: ${GLFW_LIB}")
-endif()
 
-# include directories for example shaders, models, tinyobjloeader etc. 
-#include_directories(external)
 
-# add all source files to variables SOURCE and INCLUDES
+
+
 set(SOURCES main.cpp hda_window.cpp hda_instancegpu.cpp hda_hdrdemoapp.cpp builder.cpp hda_swapchain.cpp hda_pipeline.cpp hda_model.cpp)
 set(INCLUDES hda_window.hpp hda_instancegpu.hpp hda_hdrdemoapp.hpp builder.hpp hda_swapchain.hpp hda_pipeline.hpp hda_model.hpp)
-set(APP_SHADERS shader.vert shader.frag skybox.vert skybox.frag hdr.vert hdr.frag)
+set(APP_SHADERS shader.vert shader.frag skybox.vert skybox.frag)
+
+
 
 #######################
 # Find all vertex and fragment sources within shaders directory
@@ -89,15 +80,8 @@ macro(add_shaders nameList depsList)
 		list(APPEND ${depsList} ${name} ${CMAKE_CURRENT_BINARY_DIR}/${name}.spv)
 	endforeach()
 endmacro()
+#xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
-########################
-
-
-# dangerous, causes errors while creating test code for cmake compiler, [err]: two main function
-#file(GLOB_RECURSE SOURCES ${PROJECT_SOURCE_DIR}/*.cpp)
-#file(GLOB_RECURSE INCLUDES ${PROJECT_SOURCE_DIR}/*.hpp)
-
-# tady pozor kdyztak smazat
 add_shaders("${APP_SHADERS}" APP_SHADER_DEPS)
 add_executable(${PROJECT_NAME} ${SOURCES} ${INCLUDES} ${APP_SHADER_DEPS})
 

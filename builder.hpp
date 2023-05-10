@@ -15,6 +15,13 @@
 #define NUM_OF_PARTS_WITH_SAME_TEX 103
 
 
+/*
+*
+* The core of the entire application, which assembles 
+* the individual parts and classes into a single unit 
+* and performs the rendering process.
+*
+*/
 
 class HdaBuilder {
 

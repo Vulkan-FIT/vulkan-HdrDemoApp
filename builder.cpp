@@ -3,10 +3,19 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "external/include/stb_image.h"
 
-// TODO TODO delete
-//#define VMA_IMPLEMENTATION
-//#include "external/include/vk_mem_alloc.h"
 
+/*
+*
+* Standard Vulkan object initializations are largely inspired
+* by freely available tutorials.
+*
+* https://vkguide.dev
+* https://vulkan-tutorial.com/Introduction
+* https://www.root.cz/serialy/tutorial-vulkan/
+* https://github.com/blurrypiano/littleVulkanEngine/tree/tut27
+* https://github.com/amengede/getIntoGameDev/tree/main/vulkan
+* https://kohiengine.com
+*/
 
 HdaBuilder::HdaBuilder(HdaInstanceGpu& dev, HdaWindow& win, HdaSwapchain& swa, HdaPipeline& pip) : device{ dev }, window{ win }, swapchain{ swa }, pipeline{ pip } {
 	
@@ -61,12 +70,6 @@ void HdaBuilder::initBuilder() {
 		sceneObjects.push_back(obj);
 	}
 
-	//initialize the memory allocator				TODO TODO DELETE
-	//VmaAllocatorCreateInfo allocatorInfo = {};
-	//allocatorInfo.physicalDevice = device.getPhysDevice();
-	//allocatorInfo.device = device.getDevice();
-	//allocatorInfo.instance = device.getInstance();
-	//vmaCreateAllocator(&allocatorInfo, &allocator);
 
 	createCommandPool();
 		
@@ -398,20 +401,7 @@ void HdaBuilder::createUniformBuffers() {
 void HdaBuilder::createDynamicUniformBuffer() {
 	
 	// TODO TODO DELETE
-	/*
-	//allocate vertex buffer
-	VkBufferCreateInfo bufferInfo = {};
-	bufferInfo.sType = VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO;
-	bufferInfo.pNext = nullptr;
-	bufferInfo.size = sceneObjects.size() * calcRequiredAligment(sizeof(HdaModel::SceneUniformData));
-	bufferInfo.usage = VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT;
 
-	//let the VMA library know that this data should be writeable by CPU, but also readable by GPU
-	VmaAllocationCreateInfo vmaallocInfo = {};
-	vmaallocInfo.usage = VMA_MEMORY_USAGE_CPU_TO_GPU;
-
-	//allocate the buffer
-	vmaCreateBuffer(allocator, &bufferInfo, &vmaallocInfo, &dynamicBuff, &allocation, nullptr);*/
 }
 
 
@@ -446,7 +436,6 @@ void HdaBuilder::createDescriptorPool() {
 	cout << "createDescriptorPool(): Descriptor pool is created.\n";
 }
 
-// TODO TODO smazat
 void HdaBuilder::updateDescrSets(vk::DescriptorSet descrSet, const vk::DescriptorImageInfo* descrImage) {
 
 		device.getDevice().updateDescriptorSets(
@@ -467,7 +456,6 @@ void HdaBuilder::updateDescrSets(vk::DescriptorSet descrSet, const vk::Descripto
 }
 
 
-// TODO TODO upravit parametry fce
 vector<vk::DescriptorSet> HdaBuilder::createDescriptorSets(vk::DescriptorSetLayout lay, const vk::DescriptorImageInfo* descrImage, uint32_t aE, uint32_t dC, uint32_t cnt) { 
 
 	vector<vk::DescriptorSet> descrSets;
@@ -548,14 +536,13 @@ vector<vk::DescriptorSet> HdaBuilder::createDescriptorSets(vk::DescriptorSetLayo
 			nullptr
 		);
 	}
-	cout << "createDescriptorSets(): Descriptor sets are created.\n";
+	//cout << "createDescriptorSets(): Descriptor sets are created.\n";
 
 	return descrSets;
 }
 
 
 /**
-*	@brief Create new vk::Buffer.
 *
 *	Creates a new vk::Buffer according to the specified parameters.
 *

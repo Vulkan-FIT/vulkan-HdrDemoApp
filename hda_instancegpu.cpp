@@ -35,6 +35,14 @@ void HdaInstanceGpu::initGpu() {
 }
 
 
+/*
+*
+* Instance initialization.
+*
+* The initialization procedure is inspired by Jan Peèiva's tutorial: 
+* https://www.root.cz/serialy/tutorial-vulkan/
+*
+*/
 void HdaInstanceGpu::instanceInit() {
 
 	// Vulkan version
@@ -78,6 +86,11 @@ void HdaInstanceGpu::instanceInit() {
 	std::cout << "instanceInit(): Initialization end.\n";
 }
 
+/*
+*
+* Selection of suitable equipment based on criteria.
+*
+*/
 void HdaInstanceGpu::findPhysDevice() {
 
 	cout << "findPhysDevice(): Enumerate physical devices and check which is suitable for program requirements started.\n";
@@ -96,6 +109,7 @@ void HdaInstanceGpu::findPhysDevice() {
 
 		if (isSuitable(physdev)) {
 			cout << "isSuitable(): Device rating.\n";
+
 			/*if (physdev.getProperties().deviceType == vk::PhysicalDeviceType::eDiscreteGpu) {
 				get<3>(suitablePhysDevices.back()) = 100; // score +100
 			}
@@ -129,14 +143,6 @@ void HdaInstanceGpu::findPhysDevice() {
 				}
 			}
 
-			/*for (vk::SurfaceFormatKHR sf : availableSurfaceFormats) {
-				//cout << vk::to_string(sf.format) << endl;
-				if (sf.format == vk::Format::eB8G8R8A8Srgb && sf.colorSpace == vk::ColorSpaceKHR::eSrgbNonlinear) {
-					get<4>(suitablePhysDevices.back()) = sf;
-					get<3>(suitablePhysDevices.back()) = 250; // score +100
-				}
-			}*/
-
 		}
 	}
 
@@ -146,9 +152,6 @@ void HdaInstanceGpu::findPhysDevice() {
 
 	uint32_t tmpScore = 0;
 	for (const auto& spd : suitablePhysDevices) {
-
-		// TODO TODO defaultni prirazeni prvniho dostupneho formatu ktery se nasel
-		//if (get<3>(spd) == 0 && tmpcheck)
 
 		if (get<3>(spd) > tmpScore) {
 			tmpScore = get<3>(spd);
@@ -170,12 +173,22 @@ void HdaInstanceGpu::findPhysDevice() {
 	cout << "findPhysDevice(): Function done.\n";
 }
 
+/*
+*
+* Create a surface for drawing into the window.
+*
+*/
 void HdaInstanceGpu::createWinSurface() { 
 	
 	window.createWindowSurface(instance, &winSurface);
 	
 }
 
+/*
+*
+* A function that controls support for the extension.
+*
+*/
 void HdaInstanceGpu::checkExtensionSupport(const char** glfwExts, uint32_t exGlfwCount) {
 
 	uint32_t extCount = 0;
@@ -183,7 +196,7 @@ void HdaInstanceGpu::checkExtensionSupport(const char** glfwExts, uint32_t exGlf
 	std::vector<VkExtensionProperties> extensions(extCount);
 	vkEnumerateInstanceExtensionProperties(nullptr, &extCount, extensions.data());
 
-	// TODO TODO smazat vypis
+
 	//std::cout << "available extensions:" << std::endl;
 	std::unordered_set<std::string> available;
 	for (const auto& extension : extensions) {
@@ -194,7 +207,7 @@ void HdaInstanceGpu::checkExtensionSupport(const char** glfwExts, uint32_t exGlf
 	// creates a vector that reconstructs the vector according to the specified range
 	std::vector<const char*> glfwExtensions(glfwExts, glfwExts + exGlfwCount);
 
-	// TODO TODO smazat vypis
+
 	//std::cout << "required extensions:" << std::endl;
 	for (const auto& required : glfwExtensions) {
 		//std::cout << "\t" << required << std::endl;
@@ -204,6 +217,11 @@ void HdaInstanceGpu::checkExtensionSupport(const char** glfwExts, uint32_t exGlf
 	}
 }
 
+/*
+*
+* The function of selecting a suitable device based on your own criteria.
+*
+*/
 bool HdaInstanceGpu::isSuitable(vk::PhysicalDevice physdev) {
 
 	bool swapchainExtCheck = false;
@@ -259,6 +277,11 @@ bool HdaInstanceGpu::isSuitable(vk::PhysicalDevice physdev) {
 	return false;
 }
 
+/*
+*
+* Tøída reprezentující celek okenního systému.
+*
+*/
 void HdaInstanceGpu::deviceInit() {
 
 	cout << "deviceInit(): Logical device initialization started.\n";
@@ -301,7 +324,11 @@ void HdaInstanceGpu::deviceInit() {
 	presentationQueue = device.getQueue(presentationQueueFamily, 0);
 }
 
-//////////////////////////////////////////////////////
+/*
+*
+* Format selection function for the image.
+*
+*/
 vk::Format HdaInstanceGpu::findFormat(vk::ImageTiling tiling) {
 
 	vector<vk::Format> requiredFormats = { vk::Format::eD32Sfloat, vk::Format::eD32SfloatS8Uint, vk::Format::eD24UnormS8Uint };
@@ -320,7 +347,11 @@ vk::Format HdaInstanceGpu::findFormat(vk::ImageTiling tiling) {
 	throw std::runtime_error("Required format not found!\n");
 }
 
-
+/*
+*
+* Method for initializing render pass - Vulkan object.
+*
+*/
 void HdaInstanceGpu::renderpassInit() {
 	
 	eCh = 1;

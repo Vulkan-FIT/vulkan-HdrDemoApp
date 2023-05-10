@@ -2,6 +2,20 @@
 
 using namespace std;
 
+
+/*
+*
+* Most of the initialization features are largely inspired by freely available tutorials
+* for understanding the basic principles of working with Vulkan objects.
+* 
+* https://vkguide.dev
+* https://vulkan-tutorial.com/Introduction
+* https://www.root.cz/serialy/tutorial-vulkan/
+* https://github.com/blurrypiano/littleVulkanEngine/tree/tut27
+* https://github.com/amengede/getIntoGameDev/tree/main/vulkan
+* https://kohiengine.com
+*/
+
 HdaSwapchain::HdaSwapchain(HdaInstanceGpu& device, uint32_t w, uint32_t h) : device{device}, width { w },  height { h } {
 
 	cout << "HdaSwapchain(): constructor\n";

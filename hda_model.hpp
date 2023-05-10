@@ -17,6 +17,13 @@
 
 #define P (std::cout << "print debug" << endl)
 
+
+/*
+*
+* A class representing model that render in scene.
+*
+*/
+
 class HdaModel {
 
 public:

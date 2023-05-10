@@ -3,8 +3,11 @@
 #include "hda_model.hpp"
 
 
-
-//#include <vulkan/vulkan.hpp>
+/*
+*
+* A class representing a logical device.
+*
+*/
 
 using namespace std;
 

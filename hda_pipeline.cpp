@@ -16,20 +16,24 @@ const uint32_t skyboxFragmentShaderSpirv[] = {
 	#include "skybox.frag.spv"
 };
 
-// TODO TODO upravit
-const uint32_t hdrVertexShaderSpirv[] = {
-	#include "hdr.vert.spv"
-};
-const uint32_t hdrFragmentShaderSpirv[] = {
-	#include "hdr.frag.spv"
-};
 
 
+/*
+*
+* Most of the initialization features are largely inspired by freely available tutorials
+* for understanding the basic principles of working with Vulkan objects:
+*
+* https://vkguide.dev
+* https://vulkan-tutorial.com/Introduction
+* https://www.root.cz/serialy/tutorial-vulkan/
+* https://github.com/blurrypiano/littleVulkanEngine/tree/tut27
+* https://github.com/amengede/getIntoGameDev/tree/main/vulkan
+* https://kohiengine.com
+*/
 
 HdaPipeline::HdaPipeline(HdaInstanceGpu& dev, HdaSwapchain& swa) : device{ dev }, swapchain{ swa } {
 
 	cout << "HdaPipeline(): constructor\n";
-	//initPipeline();
 }
 
 HdaPipeline::~HdaPipeline() {
@@ -45,10 +49,6 @@ void HdaPipeline::initPipeline() {
 	eCh = 1;
 
 	createShaderModules();
-	//descriptorSetLayout = createDescriptorSetLayout(0, 1);
-	//pipelineLayout = createPipelineLayout(vk::PipelineLayoutCreateFlags(), UINT32_MAX, &descriptorSetLayout, UINT32_MAX, nullptr);
-	//pipeline = createPipeline(vk::PipelineCreateFlags(), UINT32_MAX, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, 
-	//							pipelineLayout, device.getRenderpass(), UINT32_MAX, nullptr, UINT32_MAX);
 }
 
 void HdaPipeline::cleanupPipeline() {
@@ -328,21 +328,4 @@ void HdaPipeline::createShaderModules() {
 			)
 		);
 
-	hdrVertexShaderModule =
-		device.getDevice().createShaderModule(
-			vk::ShaderModuleCreateInfo(
-				vk::ShaderModuleCreateFlags(),
-				sizeof(hdrVertexShaderSpirv),  // codeSize
-				hdrVertexShaderSpirv  // pCode
-			)
-		);
-
-	hdrFragmentShaderModule =
-		device.getDevice().createShaderModule(
-			vk::ShaderModuleCreateInfo(
-				vk::ShaderModuleCreateFlags(),
-				sizeof(hdrFragmentShaderSpirv),  // codeSize
-				hdrFragmentShaderSpirv  // pCode
-			)
-		);
 }

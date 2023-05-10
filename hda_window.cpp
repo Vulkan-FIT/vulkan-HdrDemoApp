@@ -40,9 +40,6 @@ void HdaWindow::framebufferCallback(GLFWwindow* window, int width, int height) {
 
 	auto hdaWin = reinterpret_cast<HdaWindow*>(glfwGetWindowUserPointer(window));
 	hdaWin->framebufferResized = true;
-
-	//hdaWin->winWidth = width;
-	//hdaWin->winHeight = height;
 }
 
 void HdaWindow::keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods) {

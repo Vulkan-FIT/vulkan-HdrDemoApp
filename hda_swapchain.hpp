@@ -1,6 +1,12 @@
 #pragma once
 #include "hda_instancegpu.hpp"
 
+/*
+*
+* A class representing vulkan object - swapchain.
+*
+*/
+
 class HdaSwapchain {
 
 public:

@@ -4,9 +4,14 @@
 #include <iostream>
 #include <functional>
 #include <vulkan/vulkan.hpp>
-#include <GLFW/glfw3.h>
+#include <glfw-3.3.8.bin.WIN64/include/GLFW/glfw3.h>
 
 
+/*
+*
+* A class representing the whole of a window system.
+*
+*/
 
 class HdaWindow {
 

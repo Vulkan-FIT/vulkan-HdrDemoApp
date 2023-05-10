@@ -61,14 +61,12 @@ std::array<vk::VertexInputAttributeDescription, 4> HdaModel::Vertex::getAttribut
 
 
 /*
-*  Code of attribute loading modified from example on official github page tinyobjloader:
-*  https://github.com/tinyobjloader/tinyobjloader
+*  Code of attribute loading modified from example on:
+*  https://vkguide.dev/docs/chapter-3/obj_loading/
 * 
 */
 void HdaModel::Mesh::loadObjFormat(const char* filename, std::string mtlBasedir) {
 
-	// TODO TODO pouzit c++ tinyobjloader
-	// TODO TODO prepsat nazvy pronennych na camelstyle
 
 	//attrib will contain the vertex arrays of the file
 	tinyobj::attrib_t attrib;
@@ -204,7 +202,7 @@ void HdaModel::Mesh::loadObjFormat(const char* filename, std::string mtlBasedir)
 	submeshCnt = submeshCount;
 }
 
-// TODO TODO
+
 /*
 *  Code of camera movement modified from tutorial article obtained from LearnOpenGL:
 *  https://learnopengl.com/Getting-started/Camera

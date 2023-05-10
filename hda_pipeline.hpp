@@ -2,6 +2,11 @@
 #include "hda_instancegpu.hpp"
 #include "hda_swapchain.hpp"
 
+/*
+*
+* A class representing vulkan object - pipeline.
+*
+*/
 
 class HdaPipeline {
 
