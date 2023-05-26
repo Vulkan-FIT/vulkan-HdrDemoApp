@@ -55,6 +55,12 @@ void HdaWindow::keyCallback(GLFWwindow* window, int key, int scancode, int actio
 		auto hdaWin = reinterpret_cast<HdaWindow*>(glfwGetWindowUserPointer(window));
 		hdaWin->keyPressedM = true;
 	}
+
+	if (key == GLFW_KEY_I && action == GLFW_PRESS) {
+
+		auto hdaWin = reinterpret_cast<HdaWindow*>(glfwGetWindowUserPointer(window));
+		hdaWin->keyPressedI = true;
+	}
 }
 
 void HdaWindow::createWindowSurface(vk::Instance instance, vk::SurfaceKHR  *winSurface) {

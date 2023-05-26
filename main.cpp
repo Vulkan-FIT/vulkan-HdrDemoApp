@@ -8,11 +8,19 @@ using namespace std;
 
 int main(int /*argc*/, char** /*argv*/) {
 
+	
+
 	// catch exceptions
 	// (vulkan.hpp functions throw if they fail)
 	try {
 		
 		HdrDemoApp mainApp;
+		
+		mainApp.showUsage();
+		cout << "\n-       PRESS ENTER FOR START APPLICATION       -\n";
+		cin.ignore();
+
+
 		mainApp.runApp();
 
 	// catch exceptions

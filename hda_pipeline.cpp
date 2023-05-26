@@ -33,7 +33,8 @@ const uint32_t skyboxFragmentShaderSpirv[] = {
 
 HdaPipeline::HdaPipeline(HdaInstanceGpu& dev, HdaSwapchain& swa) : device{ dev }, swapchain{ swa } {
 
-	cout << "HdaPipeline(): constructor\n";
+	//cout << "HdaPipeline(): constructor\n";
+	cout << ". ";
 }
 
 HdaPipeline::~HdaPipeline() {

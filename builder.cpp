@@ -19,7 +19,8 @@
 
 HdaBuilder::HdaBuilder(HdaInstanceGpu& dev, HdaWindow& win, HdaSwapchain& swa, HdaPipeline& pip) : device{ dev }, window{ win }, swapchain{ swa }, pipeline{ pip } {
 	
-	cout << "HdaBuilder(): constructor\n";
+	//cout << "HdaBuilder(): constructor\n";
+	cout << ". ";
 
 }
 

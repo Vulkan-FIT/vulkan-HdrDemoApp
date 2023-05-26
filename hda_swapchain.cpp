@@ -18,7 +18,8 @@ using namespace std;
 
 HdaSwapchain::HdaSwapchain(HdaInstanceGpu& device, uint32_t w, uint32_t h) : device{device}, width { w },  height { h } {
 
-	cout << "HdaSwapchain(): constructor\n";
+	//cout << "HdaSwapchain(): constructor\n";
+	cout << ". ";
 	//initSwapchain();
 }
 

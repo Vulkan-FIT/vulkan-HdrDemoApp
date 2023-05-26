@@ -10,7 +10,8 @@ using namespace std;
 
 HdaInstanceGpu::HdaInstanceGpu(HdaWindow& window) : window{window} {
 	
-	cout << "HdaInstanceGpu(): constructor\n";
+	//cout << "HdaInstanceGpu(): constructor\n";
+	cout << ". ";
 }
 
 HdaInstanceGpu::~HdaInstanceGpu() {
@@ -132,7 +133,7 @@ void HdaInstanceGpu::findPhysDevice() {
 				}
 				else if (sf.format == vk::Format::eA2B10G10R10UnormPack32 && sf.colorSpace == vk::ColorSpaceKHR::eSrgbNonlinear) {
 						get<4>(suitablePhysDevices.back()) = sf;
-						get<3>(suitablePhysDevices.back()) = 50; // score +100
+						get<3>(suitablePhysDevices.back()) = 150; // score +100
 						tmpcheck = 1;
 				}
 				else if (sf.format == vk::Format::eB8G8R8A8Srgb && sf.colorSpace == vk::ColorSpaceKHR::eSrgbNonlinear) {

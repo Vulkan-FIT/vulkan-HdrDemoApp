@@ -38,7 +38,8 @@ public:
 	inline void setKeyPressedXFlag() { keyPressedX = false; }
 	inline bool getKeyPressedMFlag() { return keyPressedM; }
 	inline void setKeyPressedMFlag() { keyPressedM = false; }
-
+	inline bool getKeyPressedIFlag() { return keyPressedI; }
+	inline void setKeyPressedIFlag() { keyPressedI = false; }
 
 	void createWindowSurface(vk::Instance, vk::SurfaceKHR *);
 
@@ -52,6 +53,7 @@ private:
 	bool framebufferResized = false;
 	bool keyPressedX = false;
 	bool keyPressedM = false;
+	bool keyPressedI = false;
 
 	vk::Instance instance;
 	vk::PhysicalDevice physDev;

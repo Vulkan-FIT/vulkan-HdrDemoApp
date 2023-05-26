@@ -23,10 +23,12 @@ class HdrDemoApp {
 
 public:
 
-	HdrDemoApp() { cout << "HdrDemoApp(): constructor\n"; };
+	HdrDemoApp() { cout << ". "; } //cout << "HdrDemoApp(): constructor\n"; };
 	~HdrDemoApp() { cout << "HdrDemoApp: Destructor\n"; };
 
 	void runApp();
+
+	void showUsage();
 
 private:
 
